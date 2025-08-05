@@ -30,15 +30,14 @@ public class XFromY {
     }
 
     static class State implements Comparable<State> {
-        int totalCount;  // total number of substrings used
-        int stringFactor; // weighted cost = countY * S + countRev * R
+        int totalCount;
+        int stringFactor;
 
         State(int totalCount, int stringFactor) {
             this.totalCount = totalCount;
             this.stringFactor = stringFactor;
         }
-
-        // Compare by totalCount first, then stringFactor
+        
         @Override
         public int compareTo(State other) {
             if (this.totalCount != other.totalCount)
