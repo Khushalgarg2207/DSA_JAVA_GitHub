@@ -1,5 +1,3 @@
-package TCS_CodeVita;
-
 import java.util.*;
 
 public class PrabhuExpressionEvaluator {
@@ -85,7 +83,8 @@ public class PrabhuExpressionEvaluator {
                 return;
             }
         }
-        int[] idx = {0};
+        int[] idx = new int[1];
+        idx[0] = 0;
         int res = eval(tokens, idx);
         if (idx[0] != tokens.size() || res == Integer.MIN_VALUE)
             System.out.println("expression is not complete or invalid");
