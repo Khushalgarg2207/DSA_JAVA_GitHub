@@ -41,7 +41,7 @@ public class BoardGames {
                 int nx = curr.x + dir[0];
                 int ny = curr.y + dir[1];
 
-                if(nx >= 0 && nx < M && ny >= 0 && ny < N) {
+                if(nx >= 0 && nx < M && ny >= 0 && ny < N && grid[nx][ny] == 0) {
                     if(!visited[nx][ny]) {
                         visited[nx][ny] = true;
                         q.offer(new Cell(nx, ny, curr.steps + 1));
@@ -54,8 +54,6 @@ public class BoardGames {
     }
 
     public static void main(String[] args) {
-        int M = 6;
-        int N = 6;
         int[][] grid = {
                 {0,1,0,0,0,0},
                 {0,0,0,0,0,1},
