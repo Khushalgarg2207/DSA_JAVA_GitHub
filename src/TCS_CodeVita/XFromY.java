@@ -37,7 +37,7 @@ public class XFromY {
             this.totalCount = totalCount;
             this.stringFactor = stringFactor;
         }
-        
+
         @Override
         public int compareTo(State other) {
             if (this.totalCount != other.totalCount)
