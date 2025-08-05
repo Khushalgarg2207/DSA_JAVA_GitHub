@@ -3,8 +3,8 @@ package TCS_CodeVita;
 import java.util.*;
 
 public class PrabhuExpressionEvaluator {
-    static Map<String, Integer> numMap = new HashMap<>();
-    static Set<String> opSet = new HashSet<>(Arrays.asList("add", "sub", "mul", "rem", "pow", "div"));
+    static Map<String, Integer> numMap = new HashMap<String, Integer>();
+    static Set<String> opSet = new HashSet<String>(Arrays.asList("add", "sub", "mul", "rem", "pow", "div"));
 
     static {
         numMap.put("zero", 0);
@@ -23,7 +23,8 @@ public class PrabhuExpressionEvaluator {
         if (!s.contains("c")) s = "c" + s;
         String[] parts = s.split("c");
         int result = 0;
-        for (String part : parts) {
+        for (int i = 0; i < parts.length; i++) {
+            String part = parts[i];
             if (part.isEmpty()) continue;
             if (!numMap.containsKey(part)) return -1;
             result = result * 10 + numMap.get(part);
@@ -49,19 +50,20 @@ public class PrabhuExpressionEvaluator {
         if (val1 == Integer.MIN_VALUE) return Integer.MIN_VALUE;
         int val2 = eval(tokens, idx);
         if (val2 == Integer.MIN_VALUE) return Integer.MIN_VALUE;
-        int val3, result;
-        switch (op) {
-            case "add": result = val1 + val2; break;
-            case "sub": result = val1 - val2; break;
-            case "mul": result = val1 * val2; break;
-            case "rem":
-                if (val2 == 0) return Integer.MIN_VALUE;
-                result = val1 % val2; break;
-            case "pow": result = (int) Math.pow(val1, val2); break;
-            case "div":
-                if (val2 == 0) return Integer.MIN_VALUE;
-                result = val1 / val2; break;
-            default: return Integer.MIN_VALUE;
+        int result;
+        if (op.equals("add")) result = val1 + val2;
+        else if (op.equals("sub")) result = val1 - val2;
+        else if (op.equals("mul")) result = val1 * val2;
+        else if (op.equals("rem")) {
+            if (val2 == 0) return Integer.MIN_VALUE;
+            result = val1 % val2;
+        } else if (op.equals("pow")) {
+            result = (int) Math.pow(val1, val2);
+        } else if (op.equals("div")) {
+            if (val2 == 0) return Integer.MIN_VALUE;
+            result = val1 / val2;
+        } else {
+            return Integer.MIN_VALUE;
         }
         return result;
     }
@@ -74,8 +76,9 @@ public class PrabhuExpressionEvaluator {
             return;
         }
         String[] parts = expr.split("\\s+");
-        List<String> tokens = new ArrayList<>();
-        for (String part : parts) {
+        List<String> tokens = new ArrayList<String>();
+        for (int i = 0; i < parts.length; i++) {
+            String part = parts[i];
             if (opSet.contains(part) || isValidNumber(part)) tokens.add(part);
             else {
                 System.out.println("expression evaluation stopped invalid words present");
@@ -90,4 +93,3 @@ public class PrabhuExpressionEvaluator {
             System.out.println(res);
     }
 }
-
